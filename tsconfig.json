@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es6", // Target modern JavaScript
+    "module": "commonjs", // Node.js uses CommonJS modules
+    "outDir": "./dist", // Output directory for compiled JS
+    "rootDir": "./src", // Specify where your source files are
+    "strict": true, // Enable all strict type-checking options
+    "noImplicitAny": true, // Raise error for variables with an 'any' type
+    "noImplicitReturns": true, // Ensure functions always return a value
+    "noImplicitThis": true, // Raise error for 'this' being of type 'any'
+    "strictNullChecks": true, // Ensure null and undefined are handled properly
+    "strictFunctionTypes": true, // Strict checking of function types
+    "strictBindCallApply": true, // Ensure methods like bind/call/apply are properly typed
+    "noFallthroughCasesInSwitch": true, // Disallow fallthrough cases in switch statements
+    "esModuleInterop": true, // Import modules without issues with `require` and `import`
+    "skipLibCheck": true, // Skip type-checking third-party libraries
+    "forceConsistentCasingInFileNames": true // Disallow inconsistent case in file names
+  },
+  "include": ["src/**/*.ts"], // Include all TypeScript files in 'src' folder
+  "exclude": ["node_modules", "dist"] // Exclude 'node_modules' and 'dist' folder
+}
