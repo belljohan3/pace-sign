@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 10000;
 
 app.get("/login/:piId", (req: Request, res: Response) => {
   const piId = req.params.piId;
@@ -25,11 +25,9 @@ app.get("/callback", async (req: Request, res: Response) => {
       code: code,
       grant_type: "authorization_code",
       redirect_uri: process.env.REDIRECT_URI,
-      audience: process.env.API_AUDIENCE,
     });
 
     const accessToken = response.data.access_token;
-    console.log("datas", req.body);
 
     // Send token to the Raspberry Pi (which can be done via a local network or other means)
     await axios.post(`http://localhost:4000/api/token`, {

@@ -13,7 +13,8 @@ piApp.post("/api/token", async (req, res) => {
 
   console.log("Received token successfully");
 
-  const response = await axios.get(
+  // Test endpoint by getting the BUK Status
+  const bukStatus = await axios.get(
     "https://ca-aksjonapp-api.kindisland-edecf2b1.westeurope.azurecontainerapps.io/BukStatus/personal",
     {
       headers: {
@@ -22,7 +23,7 @@ piApp.post("/api/token", async (req, res) => {
     }
   );
 
-  console.log("Current BUK Status:", response.data);
+  console.log("Current BUK Status:", bukStatus.data);
 
   res.sendStatus(200);
 });
