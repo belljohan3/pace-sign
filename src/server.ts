@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000;
 app.get("/login/:piId", (req: Request, res: Response) => {
   const piId = req.params.piId;
   // Redirect user to BCC login (this will need the actual BCC endpoint for authentication)
-  const loginUrl = `https://login.bcc.no/oauth/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&response_type=code&state=${piId}`;
+  const loginUrl = `https://login.bcc.no/oauth/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&audience=${process.env.API_AUDIENCE}&response_type=code&state=${piId}`;
   res.redirect(loginUrl);
 });
 
@@ -25,6 +25,7 @@ app.get("/callback", async (req: Request, res: Response) => {
       code: code,
       grant_type: "authorization_code",
       redirect_uri: process.env.REDIRECT_URI,
+      audience: process.env.API_AUDIENCE,
     });
 
     const accessToken = response.data.access_token;

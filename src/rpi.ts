@@ -10,7 +10,8 @@ piApp.use(express.json());
 
 piApp.post("/api/token", async (req, res) => {
   token = req.body.access_token;
-  console.log("Received token");
+
+  console.log("Received token successfully");
 
   const response = await axios.get(
     "https://ca-aksjonapp-api.kindisland-edecf2b1.westeurope.azurecontainerapps.io/BukStatus/personal",
