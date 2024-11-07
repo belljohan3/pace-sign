@@ -5,7 +5,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const port = 10000;
+const port = 3000;
+const tokens: any = {};
 
 app.get("/login/:piId", (req: Request, res: Response) => {
   const piId = req.params.piId;
@@ -28,6 +29,7 @@ app.get("/callback", async (req: Request, res: Response) => {
     });
 
     const accessToken = response.data.access_token;
+    tokens[req.query.state as any] = accessToken;
 
     // Send token to the Raspberry Pi (which can be done via a local network or other means)
     await axios.post(`http://localhost:4000/api/token`, {
@@ -39,6 +41,10 @@ app.get("/callback", async (req: Request, res: Response) => {
     console.error("Error during token exchange:", error);
     res.status(500).send("An error occurred.");
   }
+});
+
+app.get("/pace-sign/token/:piId", async (req, res) => {
+  res.send(tokens[req.params.piId]);
 });
 
 app.listen(port, () => {
